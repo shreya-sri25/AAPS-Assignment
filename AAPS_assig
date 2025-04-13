@@ -1,0 +1,1046 @@
+# problem_05_max_sum_subarray_k.py
+"""
+Problem 5: Find the maximum sum of any subarray of size K in a given array.
+"""
+
+def max_sum_subarray_k(arr, k):
+    max_sum = current_sum = sum(arr[:k])
+    for i in range(k, len(arr)):
+        current_sum += arr[i] - arr[i - k]
+        max_sum = max(max_sum, current_sum)
+    return max_sum
+
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_06_longest_unique_substring.py
+"""
+Problem 6: Find the length of the longest substring without repeating characters.
+"""
+
+def longest_unique_substring(s):
+    char_index = {}
+    left = max_len = 0
+    for right in range(len(s)):
+        if s[right] in char_index and char_index[s[right]] >= left:
+            left = char_index[s[right]] + 1
+        char_index[s[right]] = right
+        max_len = max(max_len, right - left + 1)
+    return max_len
+
+# Time Complexity: O(n)
+# Space Complexity: O(min(n, m))
+
+# --------------------------
+# problem_07_sliding_window.py
+"""
+Problem 7: Explain the sliding window technique and its use in string problems.
+"""
+
+def sliding_window_max_sum(arr, k):
+    window_sum = sum(arr[:k])
+    max_sum = window_sum
+    for i in range(k, len(arr)):
+        window_sum += arr[i] - arr[i - k]
+        max_sum = max(max_sum, window_sum)
+    return max_sum
+
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_08_longest_palindrome.py
+"""
+Problem 8: Find the longest palindromic substring in a given string.
+"""
+
+def expand_from_center(s, left, right):
+    while left >= 0 and right < len(s) and s[left] == s[right]:
+        left -= 1
+        right += 1
+    return s[left + 1:right]
+
+def longest_palindromic_substring(s):
+    longest = ''
+    for i in range(len(s)):
+        odd = expand_from_center(s, i, i)
+        even = expand_from_center(s, i, i + 1)
+        longest = max(longest, odd, even, key=len)
+    return longest
+
+# Time Complexity: O(n^2)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_09_common_prefix.py
+"""
+Problem 9: Find the longest common prefix in a given set of strings.
+"""
+
+def longest_common_prefix(strs):
+    if not strs:
+        return ""
+    prefix = strs[0]
+    for s in strs[1:]:
+        while not s.startswith(prefix):
+            prefix = prefix[:-1]
+            if not prefix:
+                return ""
+    return prefix
+
+# Time Complexity: O(n * m)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_10_string_permutations.py
+"""
+Problem 10: Generate all permutations of a given string.
+"""
+
+def permute_string(s):
+    result = []
+    def backtrack(path, used):
+        if len(path) == len(s):
+            result.append("".join(path))
+            return
+        for i in range(len(s)):
+            if used[i]:
+                continue
+            used[i] = True
+            path.append(s[i])
+            backtrack(path, used)
+            path.pop()
+            used[i] = False
+    backtrack([], [False] * len(s))
+    return result
+
+# Time Complexity: O(n!)
+# Space Complexity: O(n!)
+
+"""
+Problem 11: Merge two sorted linked lists into one sorted list.
+"""
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def merge_two_lists(l1, l2):
+    dummy = ListNode()
+    tail = dummy
+    while l1 and l2:
+        if l1.val < l2.val:
+            tail.next = l1
+            l1 = l1.next
+        else:
+            tail.next = l2
+            l2 = l2.next
+        tail = tail.next
+    tail.next = l1 or l2
+    return dummy.next
+
+# Time Complexity: O(n + m)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_12_binary_search.py
+"""
+Problem 12: Find an element in a sorted array using binary search.
+"""
+
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+# Time Complexity: O(log n)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_13_integer_square_root.py
+"""
+Problem 13: Find the square root of a number using binary search.
+"""
+
+def integer_square_root(x):
+    if x < 2:
+        return x
+    left, right = 1, x
+    while left <= right:
+        mid = (left + right) // 2
+        if mid * mid == x:
+            return mid
+        elif mid * mid < x:
+            left = mid + 1
+            ans = mid
+        else:
+            right = mid - 1
+    return ans
+
+# Time Complexity: O(log x)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_14_majority_element.py
+"""
+Problem 14: Find the majority element in an array that appears more than n/2 times.
+"""
+
+def majority_element(nums):
+    count = 0
+    candidate = None
+    for num in nums:
+        if count == 0:
+            candidate = num
+        count += (1 if num == candidate else -1)
+    return candidate
+
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_15_trap_water.py
+"""
+Problem 15: Calculate how much water can be trapped between the bars of a histogram.
+"""
+
+def trap(height):
+    if not height:
+        return 0
+    left, right = 0, len(height) - 1
+    left_max = right_max = water = 0
+    while left < right:
+        if height[left] < height[right]:
+            if height[left] >= left_max:
+                left_max = height[left]
+            else:
+                water += left_max - height[left]
+            left += 1
+        else:
+            if height[right] >= right_max:
+                right_max = height[right]
+            else:
+                water += right_max - height[right]
+            right -= 1
+    return water
+
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
+"""
+Problem 16: Use Kadane’s Algorithm to find the maximum sum subarray.
+"""
+
+def max_subarray_sum(arr):
+    max_current = max_global = arr[0]
+    for num in arr[1:]:
+        max_current = max(num, max_current + num)
+        max_global = max(max_global, max_current)
+    return max_global
+
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_17_merge_intervals.py
+"""
+Problem 17: Merge overlapping intervals.
+"""
+
+def merge_intervals(intervals):
+    if not intervals:
+        return []
+    intervals.sort(key=lambda x: x[0])
+    merged = [intervals[0]]
+    for start, end in intervals[1:]:
+        last_end = merged[-1][1]
+        if start <= last_end:
+            merged[-1][1] = max(last_end, end)
+        else:
+            merged.append([start, end])
+    return merged
+
+# Time Complexity: O(n log n)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_18_minimum_window_substring.py
+"""
+Problem 18: Minimum window substring that contains all characters of another string.
+"""
+from collections import Counter
+
+def min_window(s, t):
+    if not s or not t:
+        return ""
+    count_t = Counter(t)
+    window = {}
+    have, need = 0, len(count_t)
+    res, res_len = [-1, -1], float('inf')
+    l = 0
+    for r in range(len(s)):
+        window[s[r]] = window.get(s[r], 0) + 1
+        if s[r] in count_t and window[s[r]] == count_t[s[r]]:
+            have += 1
+        while have == need:
+            if (r - l + 1) < res_len:
+                res = [l, r]
+                res_len = r - l + 1
+            window[s[l]] -= 1
+            if s[l] in count_t and window[s[l]] < count_t[s[l]]:
+                have -= 1
+            l += 1
+    l, r = res
+    return s[l:r+1] if res_len != float('inf') else ""
+
+# Time Complexity: O(n)
+# Space Complexity: O(m)
+
+# --------------------------
+# problem_19_longest_consecutive_sequence.py
+"""
+Problem 19: Find the length of the longest consecutive sequence.
+"""
+
+def longest_consecutive(nums):
+    num_set = set(nums)
+    longest = 0
+    for num in nums:
+        if num - 1 not in num_set:
+            length = 1
+            while num + length in num_set:
+                length += 1
+            longest = max(longest, length)
+    return longest
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_20_product_except_self.py
+"""
+Problem 20: Return an array where each element is the product of all other elements except itself.
+"""
+
+def product_except_self(nums):
+    res = [1] * len(nums)
+    prefix = 1
+    for i in range(len(nums)):
+        res[i] = prefix
+        prefix *= nums[i]
+    suffix = 1
+    for i in reversed(range(len(nums))):
+        res[i] *= suffix
+        suffix *= nums[i]
+    return res
+
+# Time Complexity: O(n)
+# Space Complexity: O(1) (excluding result array)
+
+# --------------------------
+# problem_21_three_sum.py
+"""
+Problem 21: Find all unique triplets that sum to zero.
+"""
+
+def three_sum(nums):
+    nums.sort()
+    res = []
+    for i in range(len(nums)):
+        if i > 0 and nums[i] == nums[i-1]:
+            continue
+        l, r = i+1, len(nums)-1
+        while l < r:
+            s = nums[i] + nums[l] + nums[r]
+            if s == 0:
+                res.append([nums[i], nums[l], nums[r]])
+                l += 1
+                while l < r and nums[l] == nums[l-1]:
+                    l += 1
+            elif s < 0:
+                l += 1
+            else:
+                r -= 1
+    return res
+
+# Time Complexity: O(n^2)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_22_valid_parentheses.py
+"""
+Problem 22: Validate if the string has balanced parentheses.
+"""
+
+def is_valid_parentheses(s):
+    stack = []
+    mapping = {')': '(', ']': '[', '}': '{'}
+    for char in s:
+        if char in mapping:
+            top_element = stack.pop() if stack else '#'
+            if mapping[char] != top_element:
+                return False
+        else:
+            stack.append(char)
+    return not stack
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_23_group_anagrams.py
+"""
+Problem 23: Group anagrams together.
+"""
+from collections import defaultdict
+
+def group_anagrams(strs):
+    anagrams = defaultdict(list)
+    for word in strs:
+        key = tuple(sorted(word))
+        anagrams[key].append(word)
+    return list(anagrams.values())
+
+# Time Complexity: O(n * k log k)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_24_clone_graph.py
+"""
+Problem 24: Clone an undirected graph.
+"""
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+
+def clone_graph(node):
+    if not node:
+        return None
+    old_to_new = {}
+    def dfs(n):
+        if n in old_to_new:
+            return old_to_new[n]
+        copy = Node(n.val)
+        old_to_new[n] = copy
+        for neighbor in n.neighbors:
+            copy.neighbors.append(dfs(neighbor))
+        return copy
+    return dfs(node)
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_25_lru_cache.py
+"""
+Problem 25: Design and implement a Least Recently Used (LRU) Cache.
+"""
+from collections import OrderedDict
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.cache = OrderedDict()
+        self.capacity = capacity
+
+    def get(self, key: int) -> int:
+        if key not in self.cache:
+            return -1
+        self.cache.move_to_end(key)
+        return self.cache[key]
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.cache:
+            self.cache.move_to_end(key)
+        self.cache[key] = value
+        if len(self.cache) > self.capacity:
+            self.cache.popitem(last=False)
+
+# Time Complexity: O(1)
+# Space Complexity: O(capacity)
+
+"""
+Problem 26: Determine if all courses can be finished given prerequisites.
+"""
+from collections import defaultdict, deque
+
+def can_finish(num_courses, prerequisites):
+    graph = defaultdict(list)
+    in_degree = [0] * num_courses
+    for course, prereq in prerequisites:
+        graph[prereq].append(course)
+        in_degree[course] += 1
+    queue = deque([i for i in range(num_courses) if in_degree[i] == 0])
+    completed = 0
+    while queue:
+        course = queue.popleft()
+        completed += 1
+        for neighbor in graph[course]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+    return completed == num_courses
+
+# Time Complexity: O(V + E)
+# Space Complexity: O(V + E)
+
+# --------------------------
+# problem_27_number_of_islands.py
+"""
+Problem 27: Count the number of islands in a 2D grid.
+"""
+
+def num_islands(grid):
+    if not grid:
+        return 0
+    def dfs(r, c):
+        if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or grid[r][c] == '0':
+            return
+        grid[r][c] = '0'
+        dfs(r+1, c)
+        dfs(r-1, c)
+        dfs(r, c+1)
+        dfs(r, c-1)
+
+    count = 0
+    for r in range(len(grid)):
+        for c in range(len(grid[0])):
+            if grid[r][c] == '1':
+                dfs(r, c)
+                count += 1
+    return count
+
+# Time Complexity: O(m * n)
+# Space Complexity: O(m * n)
+
+# --------------------------
+# problem_28_max_depth_binary_tree.py
+"""
+Problem 28: Find the maximum depth of a binary tree.
+"""
+
+def max_depth(root):
+    if not root:
+        return 0
+    return 1 + max(max_depth(root.left), max_depth(root.right))
+
+# Time Complexity: O(n)
+# Space Complexity: O(h)
+
+# --------------------------
+# problem_29_invert_binary_tree.py
+"""
+Problem 29: Invert a binary tree.
+"""
+
+def invert_tree(root):
+    if root:
+        root.left, root.right = invert_tree(root.right), invert_tree(root.left)
+    return root
+
+# Time Complexity: O(n)
+# Space Complexity: O(h)
+
+# --------------------------
+# problem_30_max_path_sum.py
+"""
+Problem 30: Find the maximum path sum in a binary tree.
+"""
+
+def max_path_sum(root):
+    max_sum = float('-inf')
+
+    def helper(node):
+        nonlocal max_sum
+        if not node:
+            return 0
+        left = max(helper(node.left), 0)
+        right = max(helper(node.right), 0)
+        max_sum = max(max_sum, node.val + left + right)
+        return node.val + max(left, right)
+
+    helper(root)
+    return max_sum
+
+# Time Complexity: O(n)
+# Space Complexity: O(h)
+
+# --------------------------
+# problem_31_serial_deserial_binary_tree.py
+"""
+Problem 31: Serialize and deserialize a binary tree.
+"""
+from collections import deque
+
+class Codec:
+    def serialize(self, root):
+        if not root:
+            return ""
+        queue = deque([root])
+        res = []
+        while queue:
+            node = queue.popleft()
+            if node:
+                res.append(str(node.val))
+                queue.append(node.left)
+                queue.append(node.right)
+            else:
+                res.append("null")
+        return ','.join(res)
+
+    def deserialize(self, data):
+        if not data:
+            return None
+        nodes = data.split(',')
+        root = TreeNode(int(nodes[0]))
+        queue = deque([root])
+        i = 1
+        while queue:
+            node = queue.popleft()
+            if nodes[i] != "null":
+                node.left = TreeNode(int(nodes[i]))
+                queue.append(node.left)
+            i += 1
+            if nodes[i] != "null":
+                node.right = TreeNode(int(nodes[i]))
+                queue.append(node.right)
+            i += 1
+        return root
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_32_graph_valid_tree.py
+"""
+Problem 32: Check if a graph is a valid tree.
+"""
+from collections import defaultdict
+
+def valid_tree(n, edges):
+    if len(edges) != n - 1:
+        return False
+    graph = defaultdict(list)
+    for u, v in edges:
+        graph[u].append(v)
+        graph[v].append(u)
+    visited = set()
+
+    def dfs(node, parent):
+        if node in visited:
+            return False
+        visited.add(node)
+        for neighbor in graph[node]:
+            if neighbor != parent and not dfs(neighbor, node):
+                return False
+        return True
+
+    return dfs(0, -1) and len(visited) == n
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_33_word_ladder.py
+"""
+Problem 33: Find the length of shortest transformation from beginWord to endWord.
+"""
+from collections import deque
+
+def ladder_length(beginWord, endWord, wordList):
+    word_set = set(wordList)
+    if endWord not in word_set:
+        return 0
+    queue = deque([(beginWord, 1)])
+    while queue:
+        word, length = queue.popleft()
+        if word == endWord:
+            return length
+        for i in range(len(word)):
+            for c in 'abcdefghijklmnopqrstuvwxyz':
+                next_word = word[:i] + c + word[i+1:]
+                if next_word in word_set:
+                    word_set.remove(next_word)
+                    queue.append((next_word, length + 1))
+    return 0
+
+# Time Complexity: O(n * m^2)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_34_find_peak_element.py
+"""
+Problem 34: Find a peak element in an array.
+"""
+
+def find_peak_element(nums):
+    left, right = 0, len(nums) - 1
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] > nums[mid + 1]:
+            right = mid
+        else:
+            left = mid + 1
+    return left
+
+# Time Complexity: O(log n)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_35_search_matrix.py
+"""
+Problem 35: Search for a target value in a 2D matrix.
+"""
+
+def search_matrix(matrix, target):
+    if not matrix or not matrix[0]:
+        return False
+    rows, cols = len(matrix), len(matrix[0])
+    left, right = 0, rows * cols - 1
+    while left <= right:
+        mid = (left + right) // 2
+        mid_val = matrix[mid // cols][mid % cols]
+        if mid_val == target:
+            return True
+        elif mid_val < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return False
+
+# Time Complexity: O(log(m*n))
+# Space Complexity: O(1)
+
+"""
+Problem 36: Find all unique combinations that sum up to a target.
+"""
+
+def combination_sum(candidates, target):
+    res = []
+    def backtrack(start, comb, total):
+        if total == target:
+            res.append(list(comb))
+            return
+        if total > target:
+            return
+        for i in range(start, len(candidates)):
+            comb.append(candidates[i])
+            backtrack(i, comb, total + candidates[i])
+            comb.pop()
+    backtrack(0, [], 0)
+    return res
+
+# Time Complexity: O(2^n)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_37_permutations.py
+"""
+Problem 37: Generate all permutations of a list.
+"""
+
+def permute(nums):
+    res = []
+    def backtrack(start):
+        if start == len(nums):
+            res.append(nums[:])
+            return
+        for i in range(start, len(nums)):
+            nums[start], nums[i] = nums[i], nums[start]
+            backtrack(start + 1)
+            nums[start], nums[i] = nums[i], nums[start]
+    backtrack(0)
+    return res
+
+# Time Complexity: O(n!)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_38_subsets.py
+"""
+Problem 38: Generate all subsets of a list.
+"""
+
+def subsets(nums):
+    res = []
+    def backtrack(start, path):
+        res.append(path[:])
+        for i in range(start, len(nums)):
+            path.append(nums[i])
+            backtrack(i + 1, path)
+            path.pop()
+    backtrack(0, [])
+    return res
+
+# Time Complexity: O(2^n)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_39_word_break.py
+"""
+Problem 39: Check if the string can be segmented into dictionary words.
+"""
+
+def word_break(s, word_dict):
+    dp = [False] * (len(s) + 1)
+    dp[0] = True
+    word_set = set(word_dict)
+    for i in range(1, len(s)+1):
+        for j in range(i):
+            if dp[j] and s[j:i] in word_set:
+                dp[i] = True
+                break
+    return dp[-1]
+
+# Time Complexity: O(n^2)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_40_unique_paths.py
+"""
+Problem 40: Count unique paths in a grid from top-left to bottom-right.
+"""
+
+def unique_paths(m, n):
+    dp = [[1]*n for _ in range(m)]
+    for i in range(1, m):
+        for j in range(1, n):
+            dp[i][j] = dp[i-1][j] + dp[i][j-1]
+    return dp[-1][-1]
+
+# Time Complexity: O(m*n)
+# Space Complexity: O(m*n)
+
+# --------------------------
+# problem_41_edit_distance.py
+"""
+Problem 41: Find the minimum number of operations to convert one word to another.
+"""
+
+def min_distance(word1, word2):
+    m, n = len(word1), len(word2)
+    dp = [[0]*(n+1) for _ in range(m+1)]
+    for i in range(m+1):
+        for j in range(n+1):
+            if i == 0:
+                dp[i][j] = j
+            elif j == 0:
+                dp[i][j] = i
+            elif word1[i-1] == word2[j-1]:
+                dp[i][j] = dp[i-1][j-1]
+            else:
+                dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])
+    return dp[m][n]
+
+# Time Complexity: O(m*n)
+# Space Complexity: O(m*n)
+
+# --------------------------
+# problem_42_jump_game.py
+"""
+Problem 42: Check if you can reach the last index.
+"""
+
+def can_jump(nums):
+    reachable = 0
+    for i, num in enumerate(nums):
+        if i > reachable:
+            return False
+        reachable = max(reachable, i + num)
+    return True
+
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_43_longest_increasing_subsequence.py
+"""
+Problem 43: Find the length of longest increasing subsequence.
+"""
+import bisect
+
+def length_of_lis(nums):
+    sub = []
+    for num in nums:
+        i = bisect.bisect_left(sub, num)
+        if i == len(sub):
+            sub.append(num)
+        else:
+            sub[i] = num
+    return len(sub)
+
+# Time Complexity: O(n log n)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_44_house_robber.py
+"""
+Problem 44: Max money you can rob without alerting police.
+"""
+
+def rob(nums):
+    if not nums:
+        return 0
+    if len(nums) == 1:
+        return nums[0]
+    dp = [0]*len(nums)
+    dp[0], dp[1] = nums[0], max(nums[0], nums[1])
+    for i in range(2, len(nums)):
+        dp[i] = max(dp[i-1], dp[i-2] + nums[i])
+    return dp[-1]
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_45_climbing_stairs.py
+"""
+Problem 45: Count ways to climb stairs taking 1 or 2 steps.
+"""
+
+def climb_stairs(n):
+    if n <= 2:
+        return n
+    a, b = 1, 2
+    for _ in range(3, n+1):
+        a, b = b, a + b
+    return b
+
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
+# --------------------------
+# problem_46_coin_change.py
+"""
+Problem 46: Find fewest number of coins to make up amount.
+"""
+
+def coin_change(coins, amount):
+    dp = [float('inf')] * (amount + 1)
+    dp[0] = 0
+    for coin in coins:
+        for x in range(coin, amount + 1):
+            dp[x] = min(dp[x], dp[x - coin] + 1)
+    return dp[amount] if dp[amount] != float('inf') else -1
+
+# Time Complexity: O(amount * len(coins))
+# Space Complexity: O(amount)
+
+# --------------------------
+# problem_47_course_schedule_ii.py
+"""
+Problem 47: Return order to finish all courses (topological sort).
+"""
+from collections import defaultdict, deque
+
+def find_order(num_courses, prerequisites):
+    graph = defaultdict(list)
+    in_degree = [0] * num_courses
+    for course, prereq in prerequisites:
+        graph[prereq].append(course)
+        in_degree[course] += 1
+    queue = deque([i for i in range(num_courses) if in_degree[i] == 0])
+    order = []
+    while queue:
+        course = queue.popleft()
+        order.append(course)
+        for neighbor in graph[course]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+    return order if len(order) == num_courses else []
+
+# Time Complexity: O(V + E)
+# Space Complexity: O(V + E)
+
+# --------------------------
+# problem_48_decode_ways.py
+"""
+Problem 48: Count the number of ways to decode a string.
+"""
+
+def num_decodings(s):
+    if not s or s[0] == '0':
+        return 0
+    dp = [0] * (len(s) + 1)
+    dp[0], dp[1] = 1, 1
+    for i in range(2, len(s) + 1):
+        if s[i - 1] != '0':
+            dp[i] += dp[i - 1]
+        if 10 <= int(s[i - 2:i]) <= 26:
+            dp[i] += dp[i - 2]
+    return dp[-1]
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+# --------------------------
+# problem_49_maximal_square.py
+"""
+Problem 49: Find the area of the largest square in binary matrix.
+"""
+
+def maximal_square(matrix):
+    if not matrix:
+        return 0
+    m, n = len(matrix), len(matrix[0])
+    dp = [[0]*n for _ in range(m)]
+    max_side = 0
+    for i in range(m):
+        for j in range(n):
+            if matrix[i][j] == '1':
+                if i == 0 or j == 0:
+                    dp[i][j] = 1
+                else:
+                    dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1
+                max_side = max(max_side, dp[i][j])
+    return max_side * max_side
+
+# Time Complexity: O(m * n)
+# Space Complexity: O(m * n)
+
+# --------------------------
+# problem_50_surrounded_regions.py
+"""
+Problem 50: Capture all regions surrounded by 'X' on a 2D board.
+"""
+
+def solve(board):
+    if not board:
+        return
+    rows, cols = len(board), len(board[0])
+
+    def dfs(r, c):
+        if r < 0 or r >= rows or c < 0 or c >= cols or board[r][c] != 'O':
+            return
+        board[r][c] = 'E'
+        dfs(r+1, c)
+        dfs(r-1, c)
+        dfs(r, c+1)
+        dfs(r, c-1)
+
+    for r in range(rows):
+        for c in [0, cols-1]:
+            dfs(r, c)
+    for c in range(cols):
+        for r in [0, rows-1]:
+            dfs(r, c)
+
+    for r in range(rows):
+        for c in range(cols):
+            if board[r][c] == 'O':
+                board[r][c] = 'X'
+            elif board[r][c] == 'E':
+                board[r][c] = 'O'
+
+# Time Complexity: O(m * n)
+# Space Complexity: O(m * n)
