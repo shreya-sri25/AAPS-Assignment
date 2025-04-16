@@ -1,7 +1,5 @@
-# problem_05_max_sum_subarray_k.py
-"""
+
 Problem 5: Find the maximum sum of any subarray of size K in a given array.
-"""
 
 def max_sum_subarray_k(arr, k):
     max_sum = current_sum = sum(arr[:k])
@@ -13,11 +11,8 @@ def max_sum_subarray_k(arr, k):
 # Time Complexity: O(n)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_06_longest_unique_substring.py
-"""
+
 Problem 6: Find the length of the longest substring without repeating characters.
-"""
 
 def longest_unique_substring(s):
     char_index = {}
@@ -32,11 +27,9 @@ def longest_unique_substring(s):
 # Time Complexity: O(n)
 # Space Complexity: O(min(n, m))
 
-# --------------------------
-# problem_07_sliding_window.py
-"""
+
 Problem 7: Explain the sliding window technique and its use in string problems.
-"""
+
 
 def sliding_window_max_sum(arr, k):
     window_sum = sum(arr[:k])
@@ -49,11 +42,9 @@ def sliding_window_max_sum(arr, k):
 # Time Complexity: O(n)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_08_longest_palindrome.py
-"""
+
 Problem 8: Find the longest palindromic substring in a given string.
-"""
+
 
 def expand_from_center(s, left, right):
     while left >= 0 and right < len(s) and s[left] == s[right]:
@@ -72,11 +63,8 @@ def longest_palindromic_substring(s):
 # Time Complexity: O(n^2)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_09_common_prefix.py
-"""
+
 Problem 9: Find the longest common prefix in a given set of strings.
-"""
 
 def longest_common_prefix(strs):
     if not strs:
@@ -92,11 +80,8 @@ def longest_common_prefix(strs):
 # Time Complexity: O(n * m)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_10_string_permutations.py
-"""
+
 Problem 10: Generate all permutations of a given string.
-"""
 
 def permute_string(s):
     result = []
@@ -118,9 +103,9 @@ def permute_string(s):
 # Time Complexity: O(n!)
 # Space Complexity: O(n!)
 
-"""
+
 Problem 11: Merge two sorted linked lists into one sorted list.
-"""
+
 
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -144,11 +129,8 @@ def merge_two_lists(l1, l2):
 # Time Complexity: O(n + m)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_12_binary_search.py
-"""
+
 Problem 12: Find an element in a sorted array using binary search.
-"""
 
 def binary_search(arr, target):
     left, right = 0, len(arr) - 1
@@ -165,11 +147,8 @@ def binary_search(arr, target):
 # Time Complexity: O(log n)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_13_integer_square_root.py
-"""
+
 Problem 13: Find the square root of a number using binary search.
-"""
 
 def integer_square_root(x):
     if x < 2:
@@ -189,11 +168,8 @@ def integer_square_root(x):
 # Time Complexity: O(log x)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_14_majority_element.py
-"""
+
 Problem 14: Find the majority element in an array that appears more than n/2 times.
-"""
 
 def majority_element(nums):
     count = 0
@@ -207,11 +183,8 @@ def majority_element(nums):
 # Time Complexity: O(n)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_15_trap_water.py
-"""
+
 Problem 15: Calculate how much water can be trapped between the bars of a histogram.
-"""
 
 def trap(height):
     if not height:
@@ -236,9 +209,9 @@ def trap(height):
 # Time Complexity: O(n)
 # Space Complexity: O(1)
 
-"""
+
 Problem 16: Use Kadane’s Algorithm to find the maximum sum subarray.
-"""
+
 
 def max_subarray_sum(arr):
     max_current = max_global = arr[0]
@@ -250,11 +223,8 @@ def max_subarray_sum(arr):
 # Time Complexity: O(n)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_17_merge_intervals.py
-"""
+
 Problem 17: Merge overlapping intervals.
-"""
 
 def merge_intervals(intervals):
     if not intervals:
@@ -272,13 +242,9 @@ def merge_intervals(intervals):
 # Time Complexity: O(n log n)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_18_minimum_window_substring.py
-"""
 Problem 18: Minimum window substring that contains all characters of another string.
-"""
-from collections import Counter
 
+from collections import Counter
 def min_window(s, t):
     if not s or not t:
         return ""
@@ -305,11 +271,7 @@ def min_window(s, t):
 # Time Complexity: O(n)
 # Space Complexity: O(m)
 
-# --------------------------
-# problem_19_longest_consecutive_sequence.py
-"""
 Problem 19: Find the length of the longest consecutive sequence.
-"""
 
 def longest_consecutive(nums):
     num_set = set(nums)
@@ -325,11 +287,8 @@ def longest_consecutive(nums):
 # Time Complexity: O(n)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_20_product_except_self.py
-"""
+
 Problem 20: Return an array where each element is the product of all other elements except itself.
-"""
 
 def product_except_self(nums):
     res = [1] * len(nums)
@@ -346,11 +305,7 @@ def product_except_self(nums):
 # Time Complexity: O(n)
 # Space Complexity: O(1) (excluding result array)
 
-# --------------------------
-# problem_21_three_sum.py
-"""
 Problem 21: Find all unique triplets that sum to zero.
-"""
 
 def three_sum(nums):
     nums.sort()
@@ -375,11 +330,7 @@ def three_sum(nums):
 # Time Complexity: O(n^2)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_22_valid_parentheses.py
-"""
 Problem 22: Validate if the string has balanced parentheses.
-"""
 
 def is_valid_parentheses(s):
     stack = []
@@ -396,11 +347,9 @@ def is_valid_parentheses(s):
 # Time Complexity: O(n)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_23_group_anagrams.py
-"""
+
 Problem 23: Group anagrams together.
-"""
+
 from collections import defaultdict
 
 def group_anagrams(strs):
@@ -413,11 +362,8 @@ def group_anagrams(strs):
 # Time Complexity: O(n * k log k)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_24_clone_graph.py
-"""
 Problem 24: Clone an undirected graph.
-"""
+
 class Node:
     def __init__(self, val = 0, neighbors = None):
         self.val = val
@@ -440,13 +386,9 @@ def clone_graph(node):
 # Time Complexity: O(n)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_25_lru_cache.py
-"""
 Problem 25: Design and implement a Least Recently Used (LRU) Cache.
-"""
-from collections import OrderedDict
 
+from collections import OrderedDict
 class LRUCache:
     def __init__(self, capacity: int):
         self.cache = OrderedDict()
@@ -468,9 +410,9 @@ class LRUCache:
 # Time Complexity: O(1)
 # Space Complexity: O(capacity)
 
-"""
+
 Problem 26: Determine if all courses can be finished given prerequisites.
-"""
+
 from collections import defaultdict, deque
 
 def can_finish(num_courses, prerequisites):
@@ -493,11 +435,8 @@ def can_finish(num_courses, prerequisites):
 # Time Complexity: O(V + E)
 # Space Complexity: O(V + E)
 
-# --------------------------
-# problem_27_number_of_islands.py
-"""
+
 Problem 27: Count the number of islands in a 2D grid.
-"""
 
 def num_islands(grid):
     if not grid:
@@ -522,11 +461,7 @@ def num_islands(grid):
 # Time Complexity: O(m * n)
 # Space Complexity: O(m * n)
 
-# --------------------------
-# problem_28_max_depth_binary_tree.py
-"""
 Problem 28: Find the maximum depth of a binary tree.
-"""
 
 def max_depth(root):
     if not root:
@@ -537,10 +472,8 @@ def max_depth(root):
 # Space Complexity: O(h)
 
 # --------------------------
-# problem_29_invert_binary_tree.py
-"""
+
 Problem 29: Invert a binary tree.
-"""
 
 def invert_tree(root):
     if root:
@@ -550,11 +483,7 @@ def invert_tree(root):
 # Time Complexity: O(n)
 # Space Complexity: O(h)
 
-# --------------------------
-# problem_30_max_path_sum.py
-"""
 Problem 30: Find the maximum path sum in a binary tree.
-"""
 
 def max_path_sum(root):
     max_sum = float('-inf')
@@ -574,11 +503,9 @@ def max_path_sum(root):
 # Time Complexity: O(n)
 # Space Complexity: O(h)
 
-# --------------------------
-# problem_31_serial_deserial_binary_tree.py
-"""
+
 Problem 31: Serialize and deserialize a binary tree.
-"""
+
 from collections import deque
 
 class Codec:
@@ -619,11 +546,9 @@ class Codec:
 # Time Complexity: O(n)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_32_graph_valid_tree.py
-"""
+
 Problem 32: Check if a graph is a valid tree.
-"""
+
 from collections import defaultdict
 
 def valid_tree(n, edges):
@@ -649,11 +574,9 @@ def valid_tree(n, edges):
 # Time Complexity: O(n)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_33_word_ladder.py
-"""
+
 Problem 33: Find the length of shortest transformation from beginWord to endWord.
-"""
+
 from collections import deque
 
 def ladder_length(beginWord, endWord, wordList):
@@ -676,11 +599,8 @@ def ladder_length(beginWord, endWord, wordList):
 # Time Complexity: O(n * m^2)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_34_find_peak_element.py
-"""
+
 Problem 34: Find a peak element in an array.
-"""
 
 def find_peak_element(nums):
     left, right = 0, len(nums) - 1
@@ -695,11 +615,9 @@ def find_peak_element(nums):
 # Time Complexity: O(log n)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_35_search_matrix.py
-"""
+
 Problem 35: Search for a target value in a 2D matrix.
-"""
+
 
 def search_matrix(matrix, target):
     if not matrix or not matrix[0]:
@@ -720,9 +638,8 @@ def search_matrix(matrix, target):
 # Time Complexity: O(log(m*n))
 # Space Complexity: O(1)
 
-"""
 Problem 36: Find all unique combinations that sum up to a target.
-"""
+
 
 def combination_sum(candidates, target):
     res = []
@@ -742,11 +659,7 @@ def combination_sum(candidates, target):
 # Time Complexity: O(2^n)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_37_permutations.py
-"""
 Problem 37: Generate all permutations of a list.
-"""
 
 def permute(nums):
     res = []
@@ -764,11 +677,8 @@ def permute(nums):
 # Time Complexity: O(n!)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_38_subsets.py
-"""
+
 Problem 38: Generate all subsets of a list.
-"""
 
 def subsets(nums):
     res = []
@@ -784,11 +694,7 @@ def subsets(nums):
 # Time Complexity: O(2^n)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_39_word_break.py
-"""
 Problem 39: Check if the string can be segmented into dictionary words.
-"""
 
 def word_break(s, word_dict):
     dp = [False] * (len(s) + 1)
@@ -804,11 +710,7 @@ def word_break(s, word_dict):
 # Time Complexity: O(n^2)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_40_unique_paths.py
-"""
 Problem 40: Count unique paths in a grid from top-left to bottom-right.
-"""
 
 def unique_paths(m, n):
     dp = [[1]*n for _ in range(m)]
@@ -820,11 +722,7 @@ def unique_paths(m, n):
 # Time Complexity: O(m*n)
 # Space Complexity: O(m*n)
 
-# --------------------------
-# problem_41_edit_distance.py
-"""
 Problem 41: Find the minimum number of operations to convert one word to another.
-"""
 
 def min_distance(word1, word2):
     m, n = len(word1), len(word2)
@@ -844,11 +742,7 @@ def min_distance(word1, word2):
 # Time Complexity: O(m*n)
 # Space Complexity: O(m*n)
 
-# --------------------------
-# problem_42_jump_game.py
-"""
 Problem 42: Check if you can reach the last index.
-"""
 
 def can_jump(nums):
     reachable = 0
@@ -861,11 +755,8 @@ def can_jump(nums):
 # Time Complexity: O(n)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_43_longest_increasing_subsequence.py
-"""
 Problem 43: Find the length of longest increasing subsequence.
-"""
+
 import bisect
 
 def length_of_lis(nums):
@@ -881,11 +772,8 @@ def length_of_lis(nums):
 # Time Complexity: O(n log n)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_44_house_robber.py
-"""
+
 Problem 44: Max money you can rob without alerting police.
-"""
 
 def rob(nums):
     if not nums:
@@ -901,11 +789,8 @@ def rob(nums):
 # Time Complexity: O(n)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_45_climbing_stairs.py
-"""
 Problem 45: Count ways to climb stairs taking 1 or 2 steps.
-"""
+
 
 def climb_stairs(n):
     if n <= 2:
@@ -918,11 +803,7 @@ def climb_stairs(n):
 # Time Complexity: O(n)
 # Space Complexity: O(1)
 
-# --------------------------
-# problem_46_coin_change.py
-"""
 Problem 46: Find fewest number of coins to make up amount.
-"""
 
 def coin_change(coins, amount):
     dp = [float('inf')] * (amount + 1)
@@ -935,11 +816,9 @@ def coin_change(coins, amount):
 # Time Complexity: O(amount * len(coins))
 # Space Complexity: O(amount)
 
-# --------------------------
-# problem_47_course_schedule_ii.py
-"""
+
 Problem 47: Return order to finish all courses (topological sort).
-"""
+
 from collections import defaultdict, deque
 
 def find_order(num_courses, prerequisites):
@@ -962,11 +841,9 @@ def find_order(num_courses, prerequisites):
 # Time Complexity: O(V + E)
 # Space Complexity: O(V + E)
 
-# --------------------------
-# problem_48_decode_ways.py
-"""
+
 Problem 48: Count the number of ways to decode a string.
-"""
+
 
 def num_decodings(s):
     if not s or s[0] == '0':
@@ -983,11 +860,7 @@ def num_decodings(s):
 # Time Complexity: O(n)
 # Space Complexity: O(n)
 
-# --------------------------
-# problem_49_maximal_square.py
-"""
 Problem 49: Find the area of the largest square in binary matrix.
-"""
 
 def maximal_square(matrix):
     if not matrix:
@@ -1008,11 +881,8 @@ def maximal_square(matrix):
 # Time Complexity: O(m * n)
 # Space Complexity: O(m * n)
 
-# --------------------------
-# problem_50_surrounded_regions.py
-"""
 Problem 50: Capture all regions surrounded by 'X' on a 2D board.
-"""
+
 
 def solve(board):
     if not board:
